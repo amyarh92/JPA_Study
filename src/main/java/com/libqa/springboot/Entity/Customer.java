@@ -1,15 +1,13 @@
-package com.libqa.springboot;
+package com.libqa.springboot.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Amy on 2015. 10. 16..
  */
 
 @Entity
+@Table(name = "CUSTOMER")
 public class Customer {
 
 	@Id

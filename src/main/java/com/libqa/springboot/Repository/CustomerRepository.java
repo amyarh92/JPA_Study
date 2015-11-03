@@ -1,5 +1,6 @@
-package com.libqa.springboot;
+package com.libqa.springboot.Repository;
 
+import com.libqa.springboot.Entity.Customer;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
