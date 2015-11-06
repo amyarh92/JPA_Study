@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @localhost" uuid="30f3636e-e929-4123-9ce2-5cc71c320ada">
+    <database-info product="MySQL" version="5.6.25" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="cookie"/>
+    <table name="carts" schema="" catalog="cookie" type="TABLE">
+      <column name="cartId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="productId" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="userId" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="cartId"/>
+      <foreign-key name="FK_dnrfnuq68ibcyfgiibnbphh3" columns="productId" ref-table="products" ref-schema="" ref-catalog="cookie" ref-columns="productId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_qv8kq8wwjjtkstm730yvagd3k" columns="userId" ref-table="users" ref-schema="" ref-catalog="cookie" ref-columns="userId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_dnrfnuq68ibcyfgiibnbphh3" unique="false" columns="productId"/>
+      <index name="FK_qv8kq8wwjjtkstm730yvagd3k" unique="false" columns="userId"/>
+    </table>
+    <table name="categories" schema="" catalog="cookie" type="TABLE">
+      <column name="categoryId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="categoryName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="categoryId"/>
+      <exported-key name="FK_74yw2hp7rpgouxn9afpfhx35d" table="products" schema="" catalog="cookie" columns="categoryId"/>
+    </table>
+    <table name="orders" schema="" catalog="cookie" type="TABLE">
+      <column name="orderId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="orderAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="deliveryPath" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="payment" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="productId" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="userId" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="orderId"/>
+      <foreign-key name="FK_2gcgbfud7n5ixb7qqb6nuaqxw" columns="userId" ref-table="users" ref-schema="" ref-catalog="cookie" ref-columns="userId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ikogtyos1xuefhgon4rgyl9og" columns="productId" ref-table="products" ref-schema="" ref-catalog="cookie" ref-columns="productId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_2gcgbfud7n5ixb7qqb6nuaqxw" unique="false" columns="userId"/>
+      <index name="FK_ikogtyos1xuefhgon4rgyl9og" unique="false" columns="productId"/>
+    </table>
+    <table name="products" schema="" catalog="cookie" type="TABLE">
+      <column name="productId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="categoryId" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="createdAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="imageUrl" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="modifiedAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="originPrice" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="pdpImageUrl" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="saleEndAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="salePrice" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="saleStartAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="productId"/>
+      <foreign-key name="FK_74yw2hp7rpgouxn9afpfhx35d" columns="categoryId" ref-table="categories" ref-schema="" ref-catalog="cookie" ref-columns="categoryId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_dnrfnuq68ibcyfgiibnbphh3" table="carts" schema="" catalog="cookie" columns="productId"/>
+      <exported-key name="FK_ikogtyos1xuefhgon4rgyl9og" table="orders" schema="" catalog="cookie" columns="productId"/>
+      <index name="FK_74yw2hp7rpgouxn9afpfhx35d" unique="false" columns="categoryId"/>
+    </table>
+    <table name="users" schema="" catalog="cookie" type="TABLE">
+      <column name="userId" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="joinAt" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="userName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="userPw" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="userId"/>
+      <exported-key name="FK_qv8kq8wwjjtkstm730yvagd3k" table="carts" schema="" catalog="cookie" columns="userId"/>
+      <exported-key name="FK_2gcgbfud7n5ixb7qqb6nuaqxw" table="orders" schema="" catalog="cookie" columns="userId"/>
+    </table>
+  </data-source>
+</component>

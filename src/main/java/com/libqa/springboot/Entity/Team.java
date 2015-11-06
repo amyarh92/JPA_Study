@@ -1,11 +1,11 @@
-package com.libqa.springboot.Entity;
+package com.libqa.springboot.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by coupang on 2015. 10. 27..
+ * Created by Amy on 2015. 10. 27..
  */
 
 @Entity
@@ -13,37 +13,53 @@ import java.util.List;
 public class Team {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TEAM_ID")
-	private Long id;
+	private Long team_id;
 
-	private String name;
+	@Column(name = "TEAM_NAME")
+	private String team_name;
 
-	@OneToMany
-	@JoinColumn(name = "TEAM_ID")  //MEMBER 테이블의 TEAM_ID (FK)
+	@OneToMany(mappedBy = "team")
 	private List<Member> members = new ArrayList<Member>();
 
-
 	//연관관계 매핑
-	private Class aClass;
-	//연관관계 설정
-	public void setTeam(Class bClass) {
-		this.aClass = bClass;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "DEPARTMENT_ID")
+	private Department department;
+
+	public Team(String team_name, Department department) {
+		this.team_name = team_name;
+		this.department = department;
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public String toString() {
+		return String.format("Team[Tema_ID='%d',Team_NAME='%s']",team_id,team_name);
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	//Getter, Setter
+	public Long getTeam_id() {
+		return team_id;
 	}
 
-	public String getName() {
-		return name;
+	public void setTeam_id(Long team_id) {
+		this.team_id = team_id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getTeam_name() {
+		return team_name;
+	}
+
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
+	}
+
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
 	}
 }
